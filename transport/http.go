@@ -36,12 +36,8 @@ func Run() {
 		endpoint.EncodeResponse,
 	)
 
-	var authSvc service.StringService
-	authSvc = service.BasicStringService{}
-	authSvc = service.LoggingMiddleware{logger, authSvc}
-
 	loginHandle := httpTransport.NewServer(
-		endpoint.MakeAuthEndpoint(authSvc),
+		endpoint.MakeAuthEndpoint(svc),
 		endpoint.DecodeLoginRequest,
 		endpoint.EncodeLoginResponse,
 	)
